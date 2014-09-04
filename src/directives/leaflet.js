@@ -16,7 +16,7 @@ angular.module("leaflet-directive", []).directive('leaflet', function ($q, leafl
             layers         : '=layers',
             controls       : '=controls',
             decorations    : '=decorations',
-            eventBroadcast : '=eventBroadcast'
+            events         : '=events'
         },
         transclude: true,
         template: '<div class="angular-leaflet-map"><div ng-transclude></div></div>',
@@ -87,8 +87,8 @@ angular.module("leaflet-directive", []).directive('leaflet', function ($q, leafl
 
 
             // if no event-broadcast attribute, all events are broadcasted
-            if (!isDefined(attrs.eventBroadcast)) {
-                var logic = "broadcast";
+            if (!isDefined(attrs.events)) {
+                var logic = 'broadcast';
                 for (var i = 0; i < mapEvents.length; i++) {
                     var eventName = mapEvents[i];
                     map.on(eventName, genDispatchMapEvent(scope, eventName, logic), {

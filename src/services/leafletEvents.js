@@ -231,41 +231,41 @@ angular.module("leaflet-directive").factory('leafletEvents', function ($rootScop
             var eventName;
             var logic = "broadcast";
 
-            if (!isDefined(leafletScope.eventBroadcast)) {
+            if (!isDefined(leafletScope.events)) {
                 // Backward compatibility, if no event-broadcast attribute, all events are broadcasted
                 markerEvents = _getAvailableMarkerEvents();
-            } else if (!isObject(leafletScope.eventBroadcast)) {
+            } else if (!isObject(leafletScope.events)) {
                 // Not a valid object
                 $log.error("[AngularJS - Leaflet] event-broadcast must be an object check your model.");
             } else {
                 // We have a possible valid object
-                if (!isDefined(leafletScope.eventBroadcast.marker)) {
+                if (!isDefined(leafletScope.events.marker)) {
                     // We do not have events enable/disable do we do nothing (all enabled by default)
                     markerEvents = _getAvailableMarkerEvents();
-                } else if (!isObject(leafletScope.eventBroadcast.marker)) {
+                } else if (!isObject(leafletScope.events.marker)) {
                     // Not a valid object
                     $log.warn("[AngularJS - Leaflet] event-broadcast.marker must be an object check your model.");
                 } else {
                     // We have a possible valid map object
                     // Event propadation logic
-                    if (leafletScope.eventBroadcast.marker.logic !== undefined && leafletScope.eventBroadcast.marker.logic !== null) {
+                    if (leafletScope.events.marker.logic !== undefined && leafletScope.events.marker.logic !== null) {
                         // We take care of possible propagation logic
-                        if (leafletScope.eventBroadcast.marker.logic !== "emit" && leafletScope.eventBroadcast.marker.logic !== "broadcast") {
+                        if (leafletScope.events.marker.logic !== "emit" && leafletScope.events.marker.logic !== "broadcast") {
                             // This is an error
                             $log.warn("[AngularJS - Leaflet] Available event propagation logic are: 'emit' or 'broadcast'.");
-                        } else if (leafletScope.eventBroadcast.marker.logic === "emit") {
+                        } else if (leafletScope.events.marker.logic === "emit") {
                             logic = "emit";
                         }
                     }
                     // Enable / Disable
                     var markerEventsEnable = false, markerEventsDisable = false;
-                    if (leafletScope.eventBroadcast.marker.enable !== undefined && leafletScope.eventBroadcast.marker.enable !== null) {
-                        if (typeof leafletScope.eventBroadcast.marker.enable === 'object') {
+                    if (leafletScope.events.marker.enable !== undefined && leafletScope.events.marker.enable !== null) {
+                        if (typeof leafletScope.events.marker.enable === 'object') {
                             markerEventsEnable = true;
                         }
                     }
-                    if (leafletScope.eventBroadcast.marker.disable !== undefined && leafletScope.eventBroadcast.marker.disable !== null) {
-                        if (typeof leafletScope.eventBroadcast.marker.disable === 'object') {
+                    if (leafletScope.events.marker.disable !== undefined && leafletScope.events.marker.disable !== null) {
+                        if (typeof leafletScope.events.marker.disable === 'object') {
                             markerEventsDisable = true;
                         }
                     }
@@ -279,8 +279,8 @@ angular.module("leaflet-directive").factory('leafletEvents', function ($rootScop
                         // At this point the marker object is OK, lets enable or disable events
                         if (markerEventsEnable) {
                             // Enable events
-                            for (i = 0; i < leafletScope.eventBroadcast.marker.enable.length; i++) {
-                                eventName = leafletScope.eventBroadcast.marker.enable[i];
+                            for (i = 0; i < leafletScope.events.marker.enable.length; i++) {
+                                eventName = leafletScope.events.marker.enable[i];
                                 // Do we have already the event enabled?
                                 if (markerEvents.indexOf(eventName) !== -1) {
                                     // Repeated event, this is an error
@@ -299,8 +299,8 @@ angular.module("leaflet-directive").factory('leafletEvents', function ($rootScop
                         } else {
                             // Disable events
                             markerEvents = _getAvailableMarkerEvents();
-                            for (i = 0; i < leafletScope.eventBroadcast.marker.disable.length; i++) {
-                                eventName = leafletScope.eventBroadcast.marker.disable[i];
+                            for (i = 0; i < leafletScope.events.marker.disable.length; i++) {
+                                eventName = leafletScope.events.marker.disable[i];
                                 var index = markerEvents.indexOf(eventName);
                                 if (index === -1) {
                                     // The event does not exist
@@ -331,41 +331,41 @@ angular.module("leaflet-directive").factory('leafletEvents', function ($rootScop
             var eventName;
             var logic = "broadcast";
 
-            if (!isDefined(leafletScope.eventBroadcast)) {
+            if (!isDefined(leafletScope.events)) {
                 // Backward compatibility, if no event-broadcast attribute, all events are broadcasted
                 pathEvents = _getAvailablePathEvents();
-            } else if (!isObject(leafletScope.eventBroadcast)) {
+            } else if (!isObject(leafletScope.events)) {
                 // Not a valid object
                 $log.error("[AngularJS - Leaflet] event-broadcast must be an object check your model.");
             } else {
                 // We have a possible valid object
-                if (!isDefined(leafletScope.eventBroadcast.path)) {
+                if (!isDefined(leafletScope.events.path)) {
                     // We do not have events enable/disable do we do nothing (all enabled by default)
                     pathEvents = _getAvailablePathEvents();
-                } else if (isObject(leafletScope.eventBroadcast.paths)) {
+                } else if (isObject(leafletScope.events.paths)) {
                     // Not a valid object
                     $log.warn("[AngularJS - Leaflet] event-broadcast.path must be an object check your model.");
                 } else {
                     // We have a possible valid map object
                     // Event propadation logic
-                    if (leafletScope.eventBroadcast.path.logic !== undefined && leafletScope.eventBroadcast.path.logic !== null) {
+                    if (leafletScope.events.path.logic !== undefined && leafletScope.events.path.logic !== null) {
                         // We take care of possible propagation logic
-                        if (leafletScope.eventBroadcast.path.logic !== "emit" && leafletScope.eventBroadcast.path.logic !== "broadcast") {
+                        if (leafletScope.events.path.logic !== "emit" && leafletScope.events.path.logic !== "broadcast") {
                             // This is an error
                             $log.warn("[AngularJS - Leaflet] Available event propagation logic are: 'emit' or 'broadcast'.");
-                        } else if (leafletScope.eventBroadcast.path.logic === "emit") {
+                        } else if (leafletScope.events.path.logic === "emit") {
                             logic = "emit";
                         }
                     }
                     // Enable / Disable
                     var pathEventsEnable = false, pathEventsDisable = false;
-                    if (leafletScope.eventBroadcast.path.enable !== undefined && leafletScope.eventBroadcast.path.enable !== null) {
-                        if (typeof leafletScope.eventBroadcast.path.enable === 'object') {
+                    if (leafletScope.events.path.enable !== undefined && leafletScope.events.path.enable !== null) {
+                        if (typeof leafletScope.events.path.enable === 'object') {
                             pathEventsEnable = true;
                         }
                     }
-                    if (leafletScope.eventBroadcast.path.disable !== undefined && leafletScope.eventBroadcast.path.disable !== null) {
-                        if (typeof leafletScope.eventBroadcast.path.disable === 'object') {
+                    if (leafletScope.events.path.disable !== undefined && leafletScope.events.path.disable !== null) {
+                        if (typeof leafletScope.events.path.disable === 'object') {
                             pathEventsDisable = true;
                         }
                     }
@@ -379,8 +379,8 @@ angular.module("leaflet-directive").factory('leafletEvents', function ($rootScop
                         // At this point the path object is OK, lets enable or disable events
                         if (pathEventsEnable) {
                             // Enable events
-                            for (i = 0; i < leafletScope.eventBroadcast.path.enable.length; i++) {
-                                eventName = leafletScope.eventBroadcast.path.enable[i];
+                            for (i = 0; i < leafletScope.events.path.enable.length; i++) {
+                                eventName = leafletScope.events.path.enable[i];
                                 // Do we have already the event enabled?
                                 if (pathEvents.indexOf(eventName) !== -1) {
                                     // Repeated event, this is an error
@@ -399,8 +399,8 @@ angular.module("leaflet-directive").factory('leafletEvents', function ($rootScop
                         } else {
                             // Disable events
                             pathEvents = _getAvailablePathEvents();
-                            for (i = 0; i < leafletScope.eventBroadcast.path.disable.length; i++) {
-                                eventName = leafletScope.eventBroadcast.path.disable[i];
+                            for (i = 0; i < leafletScope.events.path.disable.length; i++) {
+                                eventName = leafletScope.events.path.disable[i];
                                 var index = pathEvents.indexOf(eventName);
                                 if (index === -1) {
                                     // The event does not exist
@@ -427,4 +427,3 @@ angular.module("leaflet-directive").factory('leafletEvents', function ($rootScop
 
     };
 });
-
