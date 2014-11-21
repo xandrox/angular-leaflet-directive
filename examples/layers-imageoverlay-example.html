@@ -8,7 +8,7 @@
     <script>
         var app = angular.module("demoapp", ["leaflet-directive"]);
         app.controller("DemoController", [ "$scope", "$log", "leafletData", "leafletBoundsHelpers", function($scope, $log, leafletData, leafletBoundsHelpers) {
-            var maxBounds = leafletBoundsHelpers.createBoundsFromArray([[-540, -960], [540, 960]]);
+            var maxBounds = leafletBoundsHelpers.createBoundsFromArray([[-250, -500], [250, 500]]);
             angular.extend($scope, {
                 defaults: {
                   scrollWheelZoom: false,
@@ -26,8 +26,8 @@
                         sanfrancisco: {
                             name: 'Andes',
                             type: 'imageOverlay',
-                            url: 'img/andes.jpg',
-                            bounds: [[-540, -960], [540, 960]],
+                            url: 'http://upload.wikimedia.org/wikipedia/fr/3/35/Starbucks_Coffee_Logo.svg',
+                            bounds: [[-250, -500], [250, 500]],
                             layerParams: {
                               noWrap: true,
                               attribution: 'Creative Commons image found <a href="http://www.flickr.com/photos/c32/8025422440/">here</a>'
